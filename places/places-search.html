@@ -27,15 +27,16 @@
   }
   
   function tilesLoaded() {
-    google.maps.event.clearListeners(map, 'tilesloaded');
+    google.maps.event.addListener(map, 'tilesloaded');
     google.maps.event.addListener(map, 'zoom_changed', search);
+    google.maps.event.addListener(map, 'dragend', search);
     google.maps.event.addListener(map, 'dragend', search);
     search();
   }
   
   function showSelectedPlace() {
-    clearResults();
-    clearMarkers();
+    // clearResults();
+    // clearMarkers();
     var place = autocomplete.getPlace();
     map.panTo(place.geometry.location);
     markers[0] = new google.maps.Marker({
@@ -68,8 +69,8 @@
     
     places.search(search, function(results, status) {
       if (status == google.maps.places.PlacesServiceStatus.OK) {
-        clearResults();
-        clearMarkers();
+        // clearResults();
+        // clearMarkers();
         for (var i = 0; i < results.length; i++) {
           markers[i] = new google.maps.Marker({
             position: results[i].geometry.location,
@@ -166,11 +167,11 @@ body {
 }
 #map_canvas {
   position: absolute;
-  width: 399px;
-  height: 399px;
-  top: 25px;
+  width: 100%;
+  height: 100%;
+  top: 0px;
   left: 0px;
-  border: 1px solid grey;
+  border: 0px solid grey;
 }
 #listing {
   position: absolute;
@@ -189,6 +190,7 @@ body {
   height: 60px;
   padding: 5px;
   font-size: 12px;
+  visibility: hidden;
 }
 .placeIcon {
   width: 16px;
@@ -213,11 +215,12 @@ body {
 </head>
 <body style="margin:0px; padding:0px;" onload="initialize()">
   <div id="locationField">
-    <input id="autocomplete" type="text" />
+    <input id="autocomplete" type="text" value="pentecostal" />
   </div>
   <div id="controls">
     <form name="controls">
-    <input type="radio" name="type" value="establishment" onclick="search()" checked="checked"/>All<br/>
+    <input type="radio" name="type" value="church" onclick="search()" checked="checked"/>All<br/>
+    <input type="radio" name="type" value="establishment" onclick="search()"/>All<br/>
     <input type="radio" name="type" value="restaurant" onclick="search()" />Restaurants<br/>
     <input type="radio" name="type" value="lodging" onclick="search()" />Lodging
     </form>
