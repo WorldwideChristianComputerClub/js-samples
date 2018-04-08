@@ -9,6 +9,35 @@
   var map, places, iw;
   var markers = [];
   var autocomplete;
+  // The MIT License (MIT)
+  //
+  // Copyright (c) 2016 Ubilabs
+  //
+  // Permission is hereby granted, free of charge, to any person obtaining a copy
+  // of this software and associated documentation files (the "Software"), to deal
+  // in the Software without restriction, including without limitation the rights
+  // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  // copies of the Software, and to permit persons to whom the Software is
+  // furnished to do so, subject to the following conditions:
+  //
+  //     The above copyright notice and this permission notice shall be included in all
+  // copies or substantial portions of the Software.
+  //
+  //     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  //     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  // AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  //     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  // SOFTWARE.
+
+
+  const whole_world = new google.maps.LatLngBounds(
+      new google.maps.LatLng(-85, -175),
+      new google.maps.LatLng(85, 175)
+  );
+
+  // END MIT Licenced Snippet
   
   function initialize() {
     var myLatlng = new google.maps.LatLng(37.783259, -122.402708);
@@ -19,7 +48,8 @@
     }
     map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
     places = new google.maps.places.PlacesService(map);
-    google.maps.event.addListener(map, 'tilesloaded', tilesLoaded);
+    // google.maps.event.addListener(map, 'tilesloaded', tilesLoaded);
+    new Worker(load_all)
     autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
       showSelectedPlace();
@@ -27,11 +57,12 @@
   }
   
   function tilesLoaded() {
-    google.maps.event.addListener(map, 'tilesloaded');
-    google.maps.event.addListener(map, 'zoom_changed', search);
-    google.maps.event.addListener(map, 'dragend', search);
-    google.maps.event.addListener(map, 'dragend', search);
-    search();
+    // google.maps.event.addListener(map, 'tilesloaded');
+    // google.maps.event.addListener(map, 'zoom_changed', search);
+    // google.maps.event.addListener(map, 'dragend', search);
+    // google.maps.event.addListener(map, 'dragend', search);
+    // search();
+      load_all();
   }
   
   function showSelectedPlace() {
@@ -48,40 +79,83 @@
     });
     iw.open(map, markers[0]);
   }
-  
+
+  function load_all() {
+      var type;
+      for (var i = 0; i < document.controls.type.length; i++) {
+          if (document.controls.type[i].checked) {
+              type = document.controls.type[i].value;
+          }
+      }
+
+      autocomplete.setBounds(map.getBounds());
+
+      var search = {
+          bounds: whole_world,
+          query: "pentecostal",
+          type:"church"
+          // bounds: map.getBounds()
+      };
+
+      places.textSearch(search, function(results, status,pagination) {
+          if (status == google.maps.places.PlacesServiceStatus.OK) {
+              // clearResults();
+              // clearMarkers();
+
+              while(pagination.hasNextPage) {
+                  // https://developers.google.com/maps/documentation/javascript/examples/place-search
+                  var current_page = pagination.nextPage();
+                  for (var i = 0; i < current_page.length; i++) {
+                      markers[i] = new google.maps.Marker({
+                          position: results[i].geometry.location,
+                          animation: google.maps.Animation.DROP
+                      });
+                      google.maps.event.addListener(markers[i], 'click', getDetails(results[i], i));
+                      setTimeout(dropMarker(i), i * 100);
+                      addResult(results[i], i);
+                    }
+                  sleep(2000);
+              }
+          }
+      }
+      )
+  }
+
   function search() {
-    var type;
-    for (var i = 0; i < document.controls.type.length; i++) {
-      if (document.controls.type[i].checked) {
-        type = document.controls.type[i].value;
+      var type;
+      for (var i = 0; i < document.controls.type.length; i++) {
+          if (document.controls.type[i].checked) {
+              type = document.controls.type[i].value;
+          }
       }
-    }
-    
-    autocomplete.setBounds(map.getBounds());
-    
-    var search = {
-      bounds: map.getBounds()
-    };
-    
-    if (type != 'establishment') {
-      search.types = [ type ];
-    }
-    
-    places.search(search, function(results, status) {
-      if (status == google.maps.places.PlacesServiceStatus.OK) {
-        // clearResults();
-        // clearMarkers();
-        for (var i = 0; i < results.length; i++) {
-          markers[i] = new google.maps.Marker({
-            position: results[i].geometry.location,
-            animation: google.maps.Animation.DROP
-          });
-          google.maps.event.addListener(markers[i], 'click', getDetails(results[i], i));
-          setTimeout(dropMarker(i), i * 100);
-          addResult(results[i], i);
-        }
+
+      autocomplete.setBounds(map.getBounds());
+
+      var search = {
+          // bounds: whole_world
+          bounds: map.getBounds()
+      };
+
+      if (type != 'establishment') {
+          search.types = [ type ];
       }
-    })
+
+
+      places.search(search, function(results, status) {
+          if (status == google.maps.places.PlacesServiceStatus.OK) {
+              // clearResults();
+              // clearMarkers();
+              for (var i = 0; i < results.length; i++) {
+                  markers[i] = new google.maps.Marker({
+                      position: results[i].geometry.location,
+                      animation: google.maps.Animation.DROP
+                  });
+                  google.maps.event.addListener(markers[i], 'click', getDetails(results[i], i));
+                  setTimeout(dropMarker(i), i * 100);
+                  addResult(results[i], i);
+              }
+          }
+      })
   }
   
   function clearMarkers() {
