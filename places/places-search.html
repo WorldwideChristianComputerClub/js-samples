@@ -169,7 +169,7 @@
                                 clearInterval(loadingLoop) // loop selfdestruct and handle exception!
                             };
                         },2000);
-                        log.info("All Adding Markers");
+                        console.info("All Adding Markers");
                         for (var i = 0; i < results.length; i++) {
                             markers[i] = new google.maps.Marker({
                                 position: results[i].geometry.location,
