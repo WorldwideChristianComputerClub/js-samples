@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData">
+  <component name="PublishConfigData" serverName="Pentacostal Map">
     <serverData>
+      <paths name="Pentacostal Map">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/.idea" />
+            <excludedPath local="true" path="$PROJECT_DIR$/2012-may-hangout" />
+            <excludedPath local="true" path="$PROJECT_DIR$/icons" />
+            <excludedPath local="true" path="$PROJECT_DIR$/images" />
+            <excludedPath local="true" path="$PROJECT_DIR$/autocomplete-addressform.html" />
+            <excludedPath local="true" path="$PROJECT_DIR$/autocomplete-hotel-search.html" />
+            <excludedPath local="true" path="$PROJECT_DIR$/keyword_rankBy.html" />
+            <excludedPath local="true" path="$PROJECT_DIR$/place-icons.html" />
+            <excludedPath local="true" path="$PROJECT_DIR$/query_autocomplete_service.html" />
+            <excludedPath local="true" path="$PROJECT_DIR$/reviews.html" />
+            <excludedPath path="places" />
+            <excludedPath path=".git" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
       <paths name="Push Biller">
         <serverdata>
           <mappings>
