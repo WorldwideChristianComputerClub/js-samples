@@ -43,19 +43,19 @@
             // var myLatlng = new google.maps.LatLng(51.509865, -0.118092); // London
 
             var myOptions = {
-                zoom: 0,
+                zoom: 2,
                 center: myLatlng,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             };
             map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
             places = new google.maps.places.PlacesService(map);
-            // google.maps.event.addListener(map, 'tilesloaded', tilesLoaded);
+            google.maps.event.addListener(map, 'tilesloaded', load_all);
             // autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
             // google.maps.event.addListener(autocomplete, 'place_changed', function() {
             //     showSelectedPlace();
             // });
-            load_all();
+            // google.maps.event.addDomListener(map, 'load', load_all);
         }
 
 
@@ -129,11 +129,11 @@
             // autocomplete.setBounds(map.getBounds());
 
             var search = {
-                name: "pentecostal !Latter-day !School",
+                name: "pentecostal -Latter-day -School -Catholic",
                 // location: google.maps.LatLng(0, 0),
                 location: London,
                 // bounds: whole_world,
-                bounds: map.getBounds(),
+                bounds: whole_world,
                 type:"church",
                 // rankby: 'DISTANCE',
             };
@@ -142,49 +142,50 @@
                 console.info("Checking If Places Service is ok");
                 console.info("status is: " + status.toString());
                 if (status == google.maps.places.PlacesServiceStatus.OK){
-                        // clearResults();
-                        // clearMarkers();
-                        console.info("Beginning Text Search");
-                        console.info("Adding And Logging Results: " + results.toString());
-                        for (var i = 0; i < results.length; i++) {
-                            markers[i] = new google.maps.Marker({
-                                position: results[i].geometry.location,
-                                animation: google.maps.Animation.DROP
-                            });
-                            google.maps.event.addListener(markers[i], 'click', getDetails(results[i], i));
-                            setTimeout(dropMarker(i), i * 100);
-                            addResult(results[i], i);
-                        }
+                            // clearResults();
+                            // clearMarkers();
+                            console.info("Beginning Text Search");
+                            console.info("Adding And Logging Results: " + results.toString());
+                            for (var i = 0; i < results.length; i++) {
+                                markers[i] = new google.maps.Marker({
+                                    position: results[i].geometry.location,
+                                    animation: google.maps.Animation.DROP
+                                });
+                                google.maps.event.addListener(markers[i], 'click', getDetails(results[i], i));
+                                setTimeout(dropMarker(i), i * 100);
+                                addResult(results[i], i);
+                            }
 
-                        console.info("More Than One Page?: " + pagination.hasNextPage.toString());
-
-                        // https://www.w3schools.com/jsref/met_win_setinterval.asp
-                        console.log("Beginning Loading Loop");
-                        var loadingLoop = setInterval(function (){
+                            console.info("More Than One Page?: " + pagination.hasNextPage.toString());
                             if(pagination.hasNextPage){
-                                console.info('Loading Next Page Of Results');
-                                pagination.nextPage();
-                                console.info('Waiting 2 Seconds Before Loading New Results');
-                            }else{
-                                clearInterval(loadingLoop) // loop selfdestruct and handle exception!
-                            };
-                        },2000);
-                        console.info("All Adding Markers");
-                        for (var i = 0; i < results.length; i++) {
-                            markers[i] = new google.maps.Marker({
-                                position: results[i].geometry.location,
-                                animation: google.maps.Animation.DROP
-                            });
-                            google.maps.event.addListener(markers[i], 'click', getDetails(results[i], i));
-                            setTimeout(dropMarker(i), i * 100);
-                            addResult(results[i], i);
+
+                            // https://www.w3schools.com/jsref/met_win_setinterval.asp
+                            console.log("Beginning Loading Loop");
+                            var loadingLoop = setInterval(function (){
+                                if(pagination.hasNextPage) {
+                                    console.info('Loading Next Page Of Results');
+                                    pagination.nextPage();
+                                    console.info('Waiting 2 Seconds Before Loading New Results');
+                                    // }else{
+                                    //     clearInterval(loadingLoop) // loop selfdestruct and handle exception!
+                                    };
+                            },2000);
+                            console.info("All Adding Markers");
+                            for (var i = 0; i < results.length; i++) {
+                                markers[i] = new google.maps.Marker({
+                                    position: results[i].geometry.location,
+                                    animation: google.maps.Animation.DROP
+                                });
+                                google.maps.event.addListener(markers[i], 'click', getDetails(results[i], i));
+                                setTimeout(dropMarker(i), i * 100);
+                                addResult(results[i], i);
+                            }
+                            // https://developers.google.com/maps/documentation/javascript/examples/place-search
+                            // var current_page = pagination.nextPage();
+                            // http://www.sean.co.uk/a/webdesign/javascriptdelay.shtm
+
+
                         }
-                        // https://developers.google.com/maps/documentation/javascript/examples/place-search
-                        // var current_page = pagination.nextPage();
-                        // http://www.sean.co.uk/a/webdesign/javascriptdelay.shtm
-
-
-
                         } else {
                 console.info("Cannot Ascertain Google Status Is Ok Or The Google Api Is Down")
                 }
