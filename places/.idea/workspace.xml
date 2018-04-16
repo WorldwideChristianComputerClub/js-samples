@@ -14,13 +14,12 @@
       <file leaf-file-name="places-search.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/places-search.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="131" column="36" lean-forward="true" selection-start-line="131" selection-start-column="36" selection-end-line="131" selection-end-column="36" />
+            <state relative-caret-position="421">
+              <caret line="133" column="44" lean-forward="true" selection-start-line="133" selection-start-column="44" selection-end-line="133" selection-end-column="44" />
               <folding>
-                <element signature="e#9865#11164#0" expanded="false" />
-                <element signature="e#11198#11415#0" expanded="false" />
-                <element signature="e#11448#11545#0" expanded="false" />
-                <element signature="e#12493#12684#0" expanded="false" />
+                <element signature="e#11316#11533#0" expanded="false" />
+                <element signature="e#11566#11663#0" expanded="false" />
+                <element signature="e#12611#12802#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -164,14 +163,14 @@
       <workItem from="1523397515579" duration="39000" />
       <workItem from="1523654380184" duration="6667000" />
       <workItem from="1523663931062" duration="3637000" />
-      <workItem from="1523906900857" duration="1120000" />
+      <workItem from="1523906900857" duration="6636000" />
     </task>
     <option name="localTasksCounter" value="3" />
     <option name="clearContext" value="false" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="41332000" />
+    <option name="totallyTimeSpent" value="46848000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -205,7 +204,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
@@ -214,10 +215,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#9865#11164#0" expanded="false" />
-            <element signature="e#11198#11415#0" expanded="false" />
-            <element signature="e#11448#11545#0" expanded="false" />
-            <element signature="e#12493#12684#0" expanded="false" />
+            <element signature="e#11316#11533#0" expanded="false" />
+            <element signature="e#11566#11663#0" expanded="false" />
+            <element signature="e#12611#12802#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -227,10 +227,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#9865#11164#0" expanded="false" />
-            <element signature="e#11198#11415#0" expanded="false" />
-            <element signature="e#11448#11545#0" expanded="false" />
-            <element signature="e#12493#12684#0" expanded="false" />
+            <element signature="e#11316#11533#0" expanded="false" />
+            <element signature="e#11566#11663#0" expanded="false" />
+            <element signature="e#12611#12802#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -240,10 +239,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#9865#11164#0" expanded="false" />
-            <element signature="e#11198#11415#0" expanded="false" />
-            <element signature="e#11448#11545#0" expanded="false" />
-            <element signature="e#12493#12684#0" expanded="false" />
+            <element signature="e#11316#11533#0" expanded="false" />
+            <element signature="e#11566#11663#0" expanded="false" />
+            <element signature="e#12611#12802#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -253,24 +251,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#9865#11164#0" expanded="false" />
-            <element signature="e#11198#11415#0" expanded="false" />
-            <element signature="e#11448#11545#0" expanded="false" />
-            <element signature="e#12493#12684#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/DatasetLoader.js" />
-    <entry file="file://$PROJECT_DIR$/places-search.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#9865#11164#0" expanded="false" />
-            <element signature="e#11198#11415#0" expanded="false" />
-            <element signature="e#11448#11545#0" expanded="false" />
-            <element signature="e#12493#12684#0" expanded="false" />
+            <element signature="e#11316#11533#0" expanded="false" />
+            <element signature="e#11566#11663#0" expanded="false" />
+            <element signature="e#12611#12802#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -281,10 +264,9 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#9865#11164#0" expanded="false" />
-            <element signature="e#11198#11415#0" expanded="false" />
-            <element signature="e#11448#11545#0" expanded="false" />
-            <element signature="e#12493#12684#0" expanded="false" />
+            <element signature="e#11316#11533#0" expanded="false" />
+            <element signature="e#11566#11663#0" expanded="false" />
+            <element signature="e#12611#12802#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -295,10 +277,22 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#9865#11164#0" expanded="false" />
-            <element signature="e#11198#11415#0" expanded="false" />
-            <element signature="e#11448#11545#0" expanded="false" />
-            <element signature="e#12493#12684#0" expanded="false" />
+            <element signature="e#11316#11533#0" expanded="false" />
+            <element signature="e#11566#11663#0" expanded="false" />
+            <element signature="e#12611#12802#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DatasetLoader.js" />
+    <entry file="file://$PROJECT_DIR$/places-search.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#11316#11533#0" expanded="false" />
+            <element signature="e#11566#11663#0" expanded="false" />
+            <element signature="e#12611#12802#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -328,13 +322,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/places-search.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="131" column="36" lean-forward="true" selection-start-line="131" selection-start-column="36" selection-end-line="131" selection-end-column="36" />
+        <state relative-caret-position="421">
+          <caret line="133" column="44" lean-forward="true" selection-start-line="133" selection-start-column="44" selection-end-line="133" selection-end-column="44" />
           <folding>
-            <element signature="e#9865#11164#0" expanded="false" />
-            <element signature="e#11198#11415#0" expanded="false" />
-            <element signature="e#11448#11545#0" expanded="false" />
-            <element signature="e#12493#12684#0" expanded="false" />
+            <element signature="e#11316#11533#0" expanded="false" />
+            <element signature="e#11566#11663#0" expanded="false" />
+            <element signature="e#12611#12802#0" expanded="false" />
           </folding>
         </state>
       </provider>
