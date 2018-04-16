@@ -50,7 +50,7 @@
             map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
             places = new google.maps.places.PlacesService(map);
-            google.maps.event.addListener(map, 'tilesloaded', load_all);
+            google.maps.event.addListenerOnce(map, 'tilesloaded', load_all);
             // autocomplete = new google.maps.places.Autocomplete(document.getElementById('autocomplete'));
             // google.maps.event.addListener(autocomplete, 'place_changed', function() {
             //     showSelectedPlace();
@@ -129,68 +129,84 @@
             // autocomplete.setBounds(map.getBounds());
 
             var search = {
-                name: "pentecostal -Latter-day -School -Catholic",
+                // name: "Pentecostal",
+                // query: "Pentecostal -Latter-day -type:School -Catholic -Orthodox",
+                query: "Pentecostal Church",
+                // query : "Hotel"
                 // location: google.maps.LatLng(0, 0),
-                location: London,
+                // location: London,
                 // bounds: whole_world,
-                bounds: whole_world,
-                type:"church",
+                // bounds: whole_world,
+                // bounds:
+                // type:"church"
                 // rankby: 'DISTANCE',
             };
-
+            // https://developers.google.com/maps/documentation/javascript/examples/place-search
             places.textSearch(search, function(results, status, pagination) {
                 console.info("Checking If Places Service is ok");
                 console.info("status is: " + status.toString());
-                if (status == google.maps.places.PlacesServiceStatus.OK){
-                            // clearResults();
-                            // clearMarkers();
-                            console.info("Beginning Text Search");
-                            console.info("Adding And Logging Results: " + results.toString());
-                            for (var i = 0; i < results.length; i++) {
-                                markers[i] = new google.maps.Marker({
-                                    position: results[i].geometry.location,
-                                    animation: google.maps.Animation.DROP
-                                });
-                                google.maps.event.addListener(markers[i], 'click', getDetails(results[i], i));
-                                setTimeout(dropMarker(i), i * 100);
-                                addResult(results[i], i);
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    // clearResults();
+                    // clearMarkers();
+                    console.info("Beginning Text Search");
+                    // console.info("Adding And Logging Results: " + results.toString());
+                    // for (var i = 0; i < results.length; i++) {
+                    //     markers[i] = new google.maps.Marker({
+                    //         position: results[i].geometry.location,
+                    //         animation: google.maps.Animation.DROP
+                    //     });
+                    //     google.maps.event.addListener(markers[i], 'click', getDetails(results[i], i));
+                    //     setTimeout(dropMarker(i), i * 100);
+                    //     addResult(results[i], i);
+                    // }
+
+                    console.info("More Than One Page?: " + pagination.hasNextPage.toString());
+                    if (pagination.hasNextPage.toString() === "true") {
+
+                        console.log("Beginning Loading Loop");
+                        // http://www.sean.co.uk/a/webdesign/javascriptdelay.shtm
+                        // https://www.w3schools.com/jsref/met_win_setinterval.asp
+
+                        var loadingLoop = setInterval(function () {
+                            if (pagination.hasNextPage.toString() === "true") {
+                                console.info('Loading Next Page Of Results');
+                                pagination.nextPage();
+                                console.info('Waiting 2 Seconds Before Loading New Results');
+                                // }else{
+                                //     clearInterval(loadingLoop) // loop selfdestruct and handle exception!
                             }
-
-                            console.info("More Than One Page?: " + pagination.hasNextPage.toString());
-                            if(pagination.hasNextPage){
-
-                            // https://www.w3schools.com/jsref/met_win_setinterval.asp
-                            console.log("Beginning Loading Loop");
-                            var loadingLoop = setInterval(function (){
-                                if(pagination.hasNextPage) {
-                                    console.info('Loading Next Page Of Results');
-                                    pagination.nextPage();
-                                    console.info('Waiting 2 Seconds Before Loading New Results');
-                                    // }else{
-                                    //     clearInterval(loadingLoop) // loop selfdestruct and handle exception!
-                                    };
-                            },2000);
-                            console.info("All Adding Markers");
-                            for (var i = 0; i < results.length; i++) {
-                                markers[i] = new google.maps.Marker({
-                                    position: results[i].geometry.location,
-                                    animation: google.maps.Animation.DROP
-                                });
-                                google.maps.event.addListener(markers[i], 'click', getDetails(results[i], i));
-                                setTimeout(dropMarker(i), i * 100);
-                                addResult(results[i], i);
-                            }
-                            // https://developers.google.com/maps/documentation/javascript/examples/place-search
-                            // var current_page = pagination.nextPage();
-                            // http://www.sean.co.uk/a/webdesign/javascriptdelay.shtm
-
-
+                            ;
+                        }, 2000);
+                        console.info("All Adding Markers");
+                        for (var i = 0; i < results.length; i++) {
+                            markers[i] = new google.maps.Marker({
+                                position: results[i].geometry.location,
+                                animation: google.maps.Animation.DROP
+                            });
+                            google.maps.event.addListener(markers[i], 'click', getDetails(results[i], i));
+                            setTimeout(dropMarker(i), i * 100);
+                            addResult(results[i], i);
                         }
-                        } else {
-                console.info("Cannot Ascertain Google Status Is Ok Or The Google Api Is Down")
+                    } else {
+                        for (var i = 0; i < results.length; i++) {
+                            markers[i] = new google.maps.Marker({
+                                position: results[i].geometry.location,
+                                animation: google.maps.Animation.DROP
+                            });
+                            google.maps.event.addListener(markers[i], 'click', getDetails(results[i], i));
+                            setTimeout(dropMarker(i), i * 100);
+                            addResult(results[i], i);
+                        }
+                    }
+
+                    // var current_page = pagination.nextPage();
+
+
+                } else {
+                    console.info("Cannot Ascertain Google Status Is Ok Or The Google Api Is Down");
                 }
-            }
-            )
+
+            });
         }
 
         function search() {
@@ -366,14 +382,14 @@ body {
   <div id="locationField">
     <input id="autocomplete" type="text" value="" />
   </div>
-  <div id="controls">
-    <form name="controls">
-    <input type="radio" name="type" value="church" onclick="search()" checked="checked"/>Churches<br/>
-    <input type="radio" name="type" value="establishment" onclick="search()"/>All<br/>
-    <input type="radio" name="type" value="restaurant" onclick="search()" />Restaurants<br/>
-    <input type="radio" name="type" value="lodging" onclick="search()" />Lodging
-    </form>
-  </div>
+  <!--<div id="controls">-->
+    <!--<form name="controls">-->
+    <!--<input type="radio" name="type" value="church" onclick="search()" checked="checked"/>Churches<br/>-->
+    <!--<input type="radio" name="type" value="establishment" onclick="search()"/>All<br/>-->
+    <!--<input type="radio" name="type" value="restaurant" onclick="search()" />Restaurants<br/>-->
+    <!--<input type="radio" name="type" value="lodging" onclick="search()" />Lodging-->
+    <!--</form>-->
+  <!--</div>-->
   <div id="map_canvas"></div>
   <div id="listing"><table id="resultsTable"><tbody id="results"></tbody></table></div>
 </body>
